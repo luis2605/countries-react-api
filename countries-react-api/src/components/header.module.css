@@ -1,0 +1,25 @@
+.header-container {
+  max-width: 600px;
+  height: 40px;
+  display: flex;
+  margin: 1em auto;
+  padding: 2.5em 1em;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: var(--boxShadow);
+}
+.header-container h1 {
+  font-size: 1.2rem;
+}
+.mode-switch {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.mode-switch p {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-left: 0.3em;
+}
