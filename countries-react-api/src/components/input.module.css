@@ -16,7 +16,7 @@
 }
 .input-search {
   margin-left: 2.5em;
-  color: var(--veryLightGray);
+  background-color: var(--veryLightGray);
   border: none;
 }
 

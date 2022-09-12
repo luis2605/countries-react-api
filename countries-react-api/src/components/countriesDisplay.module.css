@@ -5,5 +5,15 @@ img {
 
 .country-info {
   text-align: left;
-  margin-left: 1em;
+  margin: 1em 1.5em 3em 1.5em;
+}
+h1 {
+  margin: 1em 0;
+}
+p {
+  margin: 0.5em 0;
+}
+/*aux*/
+.marked {
+  font-weight: 800;
 }

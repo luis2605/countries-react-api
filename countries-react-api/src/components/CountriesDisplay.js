@@ -2,20 +2,33 @@ import React, { useEffect, useState, useCallback } from "react";
 import classes from "./countriesDisplay.module.css";
 import { Card } from "../ui/Card";
 
-const CountriesDisplay = () => {
+const CountriesDisplay = ({
+  onRegion,
+  onCountry,
+  onIsCountrySelected,
+  onSingleCountry,
+}) => {
   const [countries, setCountries] = useState([]);
+  const [selection, setSelection] = useState(
+    "https://restcountries.com/v3.1/all"
+  );
+  console.log(onRegion);
+  console.log(onCountry);
+  const fetchCountries = useCallback(async () => {
+    console.log(onIsCountrySelected);
+    setSelection((prev) => {
+      return onIsCountrySelected
+        ? `https://restcountries.com/v3.1/name/${onCountry.toLowerCase()}`
+        : `https://restcountries.com/v3.1/region/${onRegion.toLowerCase()}`;
+    });
+    const response = await fetch(selection);
 
-  useEffect(() => {
-    fetchCountries();
-  }, []);
-
-  const fetchCountries = async () => {
-    const response = await fetch("https://restcountries.com/v3.1/all");
     const data = await response.json();
 
     const transformedCountries = data.map((country) => {
       return {
         name: country.name.official,
+        common: country.name.common,
         population: country.population,
         region: country.region,
         capital: country.capital,
@@ -24,18 +37,41 @@ const CountriesDisplay = () => {
     });
 
     setCountries(transformedCountries);
+  }, [selection, onCountry, onRegion, onIsCountrySelected]);
+
+  useEffect(() => {
+    fetchCountries();
+    console.log(onIsCountrySelected);
+  }, [fetchCountries, onCountry, onRegion, onIsCountrySelected]);
+  // expanded info
+
+  const expandeInfo = (e) => {
+    console.log(e.target.id);
+    return onSingleCountry(false, e.target.id);
   };
 
-  console.log(countries);
   const cardInfo = countries.map((country) => {
     return (
       <Card>
-        <img src={country.flag} alt="flag" />;
+        <img
+          id={country.common}
+          onClick={expandeInfo}
+          src={country.flag}
+          alt="flag"
+        />
+        ;
         <section className={classes["country-info"]}>
           <h1>{country.name}</h1>
-          <p>Population: {country.population}</p>
-          <p>Region: {country.region}</p>
-          <p>Capital: {country.capital}</p>
+          <p>
+            <span className={classes.marked}>Population:</span>{" "}
+            {country.population}
+          </p>
+          <p>
+            <span className={classes.marked}>Region:</span> {country.region}
+          </p>
+          <p>
+            <span className={classes.marked}>Capital:</span> {country.capital}
+          </p>
         </section>
       </Card>
     );
