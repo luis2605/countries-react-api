@@ -24,14 +24,21 @@ const SingleCard = ({ onCountrySelected, onSingleCountry }) => {
       }
       const data = await response.json();
 
+      console.log(data);
+
       const transformedCountry = data.map((countryData) => {
         return {
           name: countryData.name.official,
           common: countryData.name.common,
+          nativName: countryData.name.common,
           population: countryData.population,
           region: countryData.region,
+          subRegion: countryData.subregion,
           capital: countryData.capital,
           flag: countryData.flags.png,
+          topLevel: countryData.tld,
+          currencies: Object.keys(countryData.currencies),
+          languages: Object.values(countryData.languages),
         };
       });
       console.log(transformedCountry);
@@ -41,9 +48,7 @@ const SingleCard = ({ onCountrySelected, onSingleCountry }) => {
     }
 
     setIsLoading(false);
-
-    console.log(error);
-  }, [error, onCountrySelected]);
+  }, [onCountrySelected]);
 
   useEffect(() => {
     fetchCountry();
@@ -54,9 +59,18 @@ const SingleCard = ({ onCountrySelected, onSingleCountry }) => {
   const cardInfo = country.map((country) => {
     return (
       <Card>
-        <img id={country.common} src={country.flag} alt="flag" />;
+        <img
+          className={classes["img-flag"]}
+          id={country.common}
+          src={country.flag}
+          alt="flag"
+        />
         <section className={classes["country-info"]}>
-          <h1>{country.name}</h1>
+          <h1>{country.common}</h1>
+          <p>
+            <span className={classes.marked}>Official Name:</span>{" "}
+            {country.name}
+          </p>
           <p>
             <span className={classes.marked}>Population:</span>{" "}
             {country.population}
@@ -65,16 +79,43 @@ const SingleCard = ({ onCountrySelected, onSingleCountry }) => {
             <span className={classes.marked}>Region:</span> {country.region}
           </p>
           <p>
+            <span className={classes.marked}>Sub Region:</span>{" "}
+            {country.subRegion}
+          </p>
+          <p>
             <span className={classes.marked}>Capital:</span> {country.capital}
           </p>
         </section>
+        <section className={classes["country-info-1"]}>
+          <p>
+            <span className={classes.marked}>Top Level Domain:</span>{" "}
+            {country.topLevel}
+          </p>
+          <p>
+            <span className={classes.marked}>Currencies:</span>{" "}
+            {country.currencies}
+          </p>
+          <p>
+            <span className={classes.marked}>Languages:</span>{" "}
+            {country.languages}
+          </p>
+        </section>
+        <h2>Border Countries:</h2>
+        <div className={classes["border-countries"]}>
+          <p></p>
+        </div>
+
+        <section></section>
       </Card>
     );
   });
   return (
     <div>
-      <button onClick={backBtnHandler}>Back</button>
-      <button onClick={fetchCountry}>Back</button>
+      <button className={classes["back-btn"]} onClick={backBtnHandler}>
+        <span class="material-symbols-outlined">arrow_back</span>
+        <p>Back</p>
+      </button>
+
       {isLoading && <div className={classes.spinner}></div>}
       {cardInfo}
     </div>

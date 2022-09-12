@@ -14,3 +14,37 @@
     transform: rotate(1turn);
   }
 }
+.back-btn {
+  display: flex;
+  align-items: center;
+  margin: 4em 1em;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: none;
+}
+.back-btn p {
+  margin-left: 0.5em;
+}
+.img-flag {
+  width: 90%;
+  margin: 0.5em auto;
+  border-radius: 0;
+}
+
+.country-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 1em;
+}
+.country-info-1 {
+  margin: 2em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/*aux*/
+.marked {
+  font-weight: 800;
+}
