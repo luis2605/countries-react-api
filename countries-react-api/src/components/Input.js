@@ -6,6 +6,7 @@ const Input = ({
   onSetRegion,
   onSetIndividualCountry,
   onIsCountrySelected,
+  onDarkMode,
 }) => {
   const [showRegion, setShowRegion] = useState(true);
 
@@ -27,8 +28,20 @@ const Input = ({
   };
 
   return (
-    <div className={classes["input-container"]}>
-      <div className={classes["input-search_container"]}>
+    <div
+      className={
+        !onDarkMode
+          ? classes["input-container"]
+          : `${classes["input-container"]} ${classes.darkMode}`
+      }
+    >
+      <div
+        className={
+          !onDarkMode
+            ? classes["input-search_container"]
+            : `${classes["input-search_container"]} ${classes.darkSearch}`
+        }
+      >
         <span onClick={selectCountry} class="material-symbols-outlined">
           search
         </span>
@@ -45,7 +58,11 @@ const Input = ({
       {showRegion && (
         <select
           onChange={selectRegion}
-          className={classes["selector"]}
+          className={
+            !onDarkMode
+              ? classes["selector"]
+              : `${classes["selector"]} ${classes.darkSearch}`
+          }
           id="simple"
           name="simple"
         >

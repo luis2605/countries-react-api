@@ -13,6 +13,8 @@ function App() {
   const [singleCountryCard, setSingleCountryCard] = useState(true);
   const [countrySelected, setCountrySelected] = useState("");
 
+  const [darkModeOn, setDarkModeOn] = useState(false);
+
   const onSetRegionHandler = (value) => {
     setRegion((prevRegion) => value);
     setIndividualCountry("");
@@ -30,15 +32,19 @@ function App() {
   const secondSingleCountryCardHandler = (value) => {
     setSingleCountryCard((pre) => value);
   };
-  console.log(countrySelected);
+  const DarkModeHandler = (value) => {
+    setDarkModeOn(value);
+  };
+  console.log(darkModeOn);
   return (
-    <div className="App">
-      <Header />
+    <div className={!darkModeOn ? "App" : "App darkMode"}>
+      <Header onDarkModeHandler={DarkModeHandler} />
       {singleCountryCard && (
         <Input
           onSetRegion={onSetRegionHandler}
           onSetIndividualCountry={onSetIndividualCountry}
           onIsCountrySelected={isCountrySelected}
+          onDarkMode={darkModeOn}
         />
       )}
       {singleCountryCard && (
@@ -47,12 +53,14 @@ function App() {
           onRegion={region}
           onCountry={individualCountry}
           onIsCountrySelected={isCountrySelected}
+          onDarkMode={darkModeOn}
         />
       )}
       {!singleCountryCard && (
         <SingleCard
           onSingleCountry={secondSingleCountryCardHandler}
           onCountrySelected={countrySelected}
+          onDarkMode={darkModeOn}
         />
       )}
     </div>

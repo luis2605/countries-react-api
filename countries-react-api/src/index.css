@@ -27,4 +27,5 @@ code {
   --white: hsl(0, 0%, 100%);
 
   --boxShadow: 0 14.5px 8px -3.5px #ddd;
+  --boxShadow1: 5px -0.5px 18px -8.5px rgb(19, 19, 19);
 }

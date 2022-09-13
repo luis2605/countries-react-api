@@ -1,8 +1,16 @@
 .card {
-  background: var(--white);
-  box-shadow: var(--boxShadow);
+  background: transparent;
+  box-shadow: var(--boxShadow1);
   border-radius: 10px;
-  margin: 2em 1.5em 4em 1.5em;
+  margin: 2em 1.5em 0 1.5em;
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 1000px) {
+  .card {
+    max-width: 800px;
+    margin: 0 auto;
+    height: 100vh;
+  }
 }

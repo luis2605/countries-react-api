@@ -7,13 +7,13 @@ const CountriesDisplay = ({
   onCountry,
   onIsCountrySelected,
   onSingleCountry,
+  onDarkMode,
 }) => {
   const [countries, setCountries] = useState([]);
   const [selection, setSelection] = useState(
     "https://restcountries.com/v3.1/all"
   );
-  console.log(onRegion);
-  console.log(onCountry);
+
   const fetchCountries = useCallback(async () => {
     console.log(onIsCountrySelected);
     setSelection((prev) => {
@@ -52,31 +52,48 @@ const CountriesDisplay = ({
 
   const cardInfo = countries.map((country) => {
     return (
-      <Card>
-        <img
-          id={country.common}
-          onClick={expandeInfo}
-          src={country.flag}
-          alt="flag"
-        />
-        ;
-        <section className={classes["country-info"]}>
-          <h1>{country.name}</h1>
-          <p>
-            <span className={classes.marked}>Population:</span>{" "}
-            {country.population}
-          </p>
-          <p>
-            <span className={classes.marked}>Region:</span> {country.region}
-          </p>
-          <p>
-            <span className={classes.marked}>Capital:</span> {country.capital}
-          </p>
-        </section>
-      </Card>
+      <>
+        <div className={!onDarkMode ? "" : classes.darkBkg}>
+          <section
+            className={
+              !onDarkMode
+                ? classes["country-info"]
+                : `${classes["country-info"]} ${classes.darkMode}`
+            }
+          >
+            <img
+              id={country.common}
+              onClick={expandeInfo}
+              src={country.flag}
+              alt="flag"
+            />
+            <h1>{country.name}</h1>
+            <p>
+              <span className={classes.marked}>Population:</span>{" "}
+              {country.population}
+            </p>
+            <p>
+              <span className={classes.marked}>Region:</span> {country.region}
+            </p>
+            <p>
+              <span className={classes.marked}>Capital:</span> {country.capital}
+            </p>
+          </section>
+        </div>
+      </>
     );
   });
-  return <div>{cardInfo}</div>;
+  return (
+    <div
+      className={
+        onDarkMode
+          ? classes["countries-container"]
+          : `${classes["countries-container"]} ${classes["darkMode"]}}`
+      }
+    >
+      {cardInfo}
+    </div>
+  );
 };
 
 export default CountriesDisplay;

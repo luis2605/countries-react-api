@@ -13,6 +13,7 @@
   box-shadow: 0 9.5px 15px 1.5px #ddd;
   border-radius: 10px;
   max-width: 375px;
+  cursor: pointer;
 }
 .input-search {
   margin-left: 2.5em;
@@ -31,4 +32,32 @@
 }
 .selector option {
   border: none;
+}
+
+@media (min-width: 1000px) {
+  .input-container {
+    max-width: 1400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+/*aux*/
+
+.darkMode {
+  background: var(--veryDarkBlue);
+  color: var(--white);
+}
+.darkSearch {
+  box-shadow: var(--boxShadow1);
+  background: var(--darkBlue);
+  color: var(--white);
+}
+.darkSearch input {
+  background: var(--darkBlue);
+  border: none;
+  color: var(--white);
+}
+.darkSearch select {
+  color: var(--white);
 }

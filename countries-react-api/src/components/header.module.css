@@ -1,8 +1,7 @@
 .header-container {
-  max-width: 600px;
   height: 40px;
   display: flex;
-  margin: 1em auto;
+  margin: 0 auto 1em auto;
   padding: 2.5em 1em;
   align-items: center;
   justify-content: space-between;
@@ -13,7 +12,7 @@
 }
 .mode-switch {
   display: flex;
-
+  cursor: pointer;
   justify-content: center;
   align-items: center;
 }
@@ -22,4 +21,15 @@
   font-weight: 600;
   font-size: 0.9rem;
   margin-left: 0.3em;
+}
+
+@media (min-width: 1000px) {
+}
+
+/*aux */
+
+.darkMode {
+  background: var(--lessVeryDarkBlue);
+  color: var(--white);
+  box-shadow: var(--boxShadow1);
 }
